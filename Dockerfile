@@ -1,6 +1,6 @@
 # Container image that runs your code
-# FROM ghcr.io/datadog/stratus-red-team:v2.23.2
-FROM alpine:3.10
+FROM ghcr.io/datadog/stratus-red-team:v2.23.2
+# FROM alpine:3.10
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
