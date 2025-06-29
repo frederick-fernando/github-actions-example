@@ -7,5 +7,7 @@ jobs:
       image: ghcr.io/datadog/stratus-red-team:v2.23.2
     name: Stratus hello
     steps:
-      - name: Run Stratus
-        run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
+      - name: Print global variable
+        run: echo $hello
+      # - name: Run Stratus
+      #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
