@@ -8,6 +8,8 @@ jobs:
     name: Stratus hello
     steps:
       - name: Print global variable
+        env:
+          SENSITIVE_VAR: ${{ secrets.HELLO }}
         run: echo $HELLO
 
       # - name: Run Stratus
