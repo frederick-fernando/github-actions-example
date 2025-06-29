@@ -10,7 +10,7 @@ jobs:
       - name: Print global variable
         env:
           SENSITIVE_VAR: ${{ secrets.HELLO }}
-        run: echo $HELLO
+        run: echo $SENSITIVE_VAR
 
       # - name: Run Stratus
       #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
