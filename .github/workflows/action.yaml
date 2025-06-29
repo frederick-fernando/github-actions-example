@@ -8,6 +8,7 @@ jobs:
     name: Stratus hello
     steps:
       - name: Print global variable
-        run: echo $hello
+        run: echo $HELLO
+
       # - name: Run Stratus
       #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
