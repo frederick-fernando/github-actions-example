@@ -26,3 +26,35 @@ jobs:
 
       # - name: Run Stratus
       #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
+name: 'Run Stratus Red Team'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-stratus-red-team:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for authenticating to AWS with OIDC
+      contents: read
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Configure AWS Credentials'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.STRATUS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.STRATUS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
+
+      - name: 'Download Stratus Red Team'
+        run: |
+          wget https://github.com/DataDog/stratus-red-team/releases/download/v2.14.0/stratus-red-team_Linux_x86_64.tar.gz
+          tar -xvf stratus-red-team_Linux_x86_64.tar.gz
+          sudo mv stratus /usr/local/bin/
+
+      - name: 'Run Stratus Red Team Detonation'
+        run: |
+          stratus detonate aws.persistence.iam-backdoor-user --cleanup
