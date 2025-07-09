@@ -41,13 +41,20 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
 
+      - name: Install AWS CLI
+        run: pip install awscli
+        
       - name: 'Configure AWS Credentials'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.STRATUS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.STRATUS_SECRET_ACCESS_KEY }}
           aws-region: 'us-east-1'
-
+      
+      - name: get caller identity 
+        run: |
+          aws sts get-caller-identity
+      
       - name: 'Download Stratus Red Team'
         run: |
           wget https://github.com/DataDog/stratus-red-team/releases/download/v2.14.0/stratus-red-team_Linux_x86_64.tar.gz
