@@ -11,6 +11,17 @@ jobs:
         env:
           SENSITIVE_VAR: ${{ secrets.HELLO }}
         run: echo $SENSITIVE_VAR
+      - name: Install AWS CLI
+        run: pip install awscli
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.STRATUS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.STRATUS_SECRET_ACCESS_KEY }}
+          aws-region: 'eu-west-2'
+      - name: get caller identity 
+        run: |
+          aws sts get-caller-identity
 
       # - name: Run Stratus
       #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
