@@ -63,4 +63,5 @@ jobs:
 
       - name: 'Run Stratus Red Team Detonation'
         run: |
+          export AWS_DEFAULT_REGION=us-east-1
           stratus detonate aws.persistence.iam-backdoor-user --cleanup
