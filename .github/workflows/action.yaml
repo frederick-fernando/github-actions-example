@@ -28,8 +28,7 @@
       #   run: /stratus detonate aws.credential-access.secretsmanager-retrieve-secrets
 name: 'Run Stratus Red Team'
 
-on:
-  workflow_dispatch:
+on: [push]
 
 jobs:
   run-stratus-red-team:
